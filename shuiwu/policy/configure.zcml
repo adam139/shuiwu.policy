@@ -1,0 +1,112 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:grok="http://namespaces.zope.org/grok"    
+    i18n_domain="shuiwu.policy">
+    
+  <five:registerPackage package="." initialize=".initialize" />
+  <includeDependencies package="." />
+  
+  <i18n:registerTranslations directory="locales" />
+    <include package=".patch" />
+    <include package=".browser" />
+    <include package=".behaviors" />        
+    <include package=".portlet" />
+    <include file="permissions.zcml" />
+
+<subscriber
+    for="dexterity.membrane.content.member.ISponsorMember
+         zope.lifecycleevent.IObjectAddedEvent"
+    handler=".subscriber.updateSponsorOperator"
+    />
+<subscriber
+    for="Products.PluggableAuthService.interfaces.events.IUserLoggedInEvent"
+    handler=".subscriber.userLoginedIn"
+    />
+
+  <!-- -*- cusomize indexer -*- -->
+        <adapter factory=".indexer.indexer_text" name="text" /> 
+
+  <genericsetup:registerProfile
+      name="default"
+      title="shuiwu.policy"
+      directory="profiles/default"
+      description="Installs the shuiwu.policy package"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+  <!-- -*- extra stuff goes here -*- -->
+  
+  <genericsetup:registerProfile
+      name="post"
+      title="shuiwu.policy post steps"
+      directory="profiles/post"
+      description="some clear and post steps after initial the site"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />  
+  <genericsetup:registerProfile
+      name="init"
+      title="shuiwu.policy initial site"
+      directory="profiles/init"
+      description="some initial steps"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />  
+  <genericsetup:upgradeStep
+      title="batch creat annual report profile"
+      description="update step to batch create annual reports."
+      source="1000"
+      destination="1001"
+      handler="shuiwu.policy.maintain.batchcreatannualreport"
+      profile="my315ok.socialorgnization:default"/>
+
+  
+  <genericsetup:upgradeStep
+      title="Add government department data profile"
+      description="update step to add government department data."
+      source="1000"
+      destination="1001"
+      handler="shuiwu.policy.migration.init_governmentdepartment"
+      profile="my315ok.socialorgnization:default"/>
+      
+  <genericsetup:upgradeStep
+      title="Update organization annual survey"
+      description="update step for publish organization annual survey to published status ."
+      source="1000"
+      destination="1001"
+      handler="shuiwu.policy.migration.publish_survey"
+      profile="my315ok.socialorgnization:default"/>
+
+  <genericsetup:upgradeStep
+      title="Update organization annual survey view"
+      description="update step for survey set default view to view ."
+      source="1000"
+      destination="1001"
+      handler="shuiwu.policy.migration.set_defaultview"
+      profile="my315ok.socialorgnization:default"/> 
+
+  <genericsetup:upgradeStep
+      title="Update organization profile"
+      description="update step for publish organization to published status ."
+      source="1000"
+      destination="1001"
+      handler="shuiwu.policy.migration.publish_organization"
+      profile="my315ok.socialorgnization:default"/>   
+         
+  <genericsetup:upgradeStep
+      title="maintain organization profile"
+      description="set all xiangtanshi organizations's belondto area as 'xiangtanshi'."
+      source="1000"
+      destination="1001"
+      handler="shuiwu.policy.maintain.set_belendto"
+      profile="my315ok.socialorgnization:default"/>
+      
+  <genericsetup:upgradeStep
+      title="migrate my315ok.socialorgnization.page to Document"
+      description="migrate my315ok.socialorgnization.page to Document"
+      source="1001"
+      destination="1002"
+      handler="shuiwu.policy.migration.migrate2Document"
+      profile="my315ok.socialorgnization:default"/>       
+
+</configure>
