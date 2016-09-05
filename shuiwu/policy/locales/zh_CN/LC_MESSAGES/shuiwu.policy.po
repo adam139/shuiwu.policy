@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: xtshzz.policy\n"
+"Project-Id-Version: shuiwu.policy\n"
 "POT-Creation-Date: 2015-02-27 12:15+0000\n"
 "PO-Revision-Date: 2015-02-16 20:49+0800\n"
 "Last-Translator: adam <yuejun.tang@gmail.com>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Language-Code: zh-cn\n"
 "Language-Name: Chinese\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: xtshzz.policy\n"
+"Domain: shuiwu.policy\n"
 
 #: ./browser/member_view.py:255
 msgid "Base information"

@@ -15,7 +15,7 @@ msgstr ""
 "Language-Code: en\n"
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: xtshzz.policy\n"
+"Domain: shuiwu.policy\n"
 
 #: ./browser/member_view.py:255
 msgid "Base information"

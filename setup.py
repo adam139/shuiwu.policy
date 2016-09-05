@@ -5,7 +5,7 @@ version = '1.0'
 
 setup(name='shuiwu.policy',
       version=version,
-      description="a site policy for xtshzz web site",
+      description="a site policy for shuiwu web site",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from
@@ -20,24 +20,15 @@ setup(name='shuiwu.policy',
       url='https://github.com/collective/',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
-      namespace_packages=['xtshzz'],
+      namespace_packages=['shuiwu'],
       include_package_data=True,
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'Products.CMFPlone',
-          'collective.z3cform.datetimewidget',
-          'Products.membrane>=2.0.2',          
-          'five.grok',
-          'collective.wtf',
-          'dexterity.membrane',          
+          'Products.CMFPlone',       
           'collective.monkeypatcher',
           'z3c.jbot',
-          'my315ok.socialorgnization',
-#           'collective.diazotheme.bootstrap',
-          'z3c.caching',
-          'collective.autopermission',
-                                                                     
+          'z3c.caching',                                                                     
           # -*- Extra requirements: -*-
       ],
       extras_require={

@@ -1,5 +1,5 @@
 #!/bin/sh
-PRODUCTNAME='xtshzz.policy'
+PRODUCTNAME='shuiwu.policy'
 I18NDOMAIN=$PRODUCTNAME
 
 # Synchronise the .pot with the templates.

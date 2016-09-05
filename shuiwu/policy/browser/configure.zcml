@@ -15,20 +15,20 @@
       name="index.html"
       class=".homepage.FrontpageView"
       permission="zope.Public"
-      layer="collective.diazotheme.bootstrap.interfaces.IThemeSpecific"       
+      layer="shuiwu.theme.interfaces.IThemeSpecific"       
       template="templates/homepage.pt"
 />      
   <browser:page
       for="*"
       name="footer"
       permission="zope.Public"
- 	    layer=".interfaces.IXtshzzThemeSpecific"       
+ 	    layer=".interfaces.IThemeSpecific"       
       template="templates/footer.pt"
       />      
     <!-- The search box -->
     <browser:viewlet
         name="plone.searchbox"
-        layer=".interfaces.IXtshzzThemeSpecific"        
+        layer=".interfaces.IThemeSpecific"        
         manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
         class=".common.SearchBoxViewlet"
         permission="zope2.View"
@@ -41,7 +41,7 @@
         name="plone.path_bar"
         manager="plone.app.layout.viewlets.interfaces.IAboveContent"
         class=".common.PathBarViewlet"
-        layer=".interfaces.IXtshzzThemeSpecific"
+        layer=".interfaces.IThemeSpecific"
         permission="zope2.View"
         />        
     <!-- Override global sections viewlet -->
@@ -50,7 +50,7 @@
         name="plone.global_sections"
         manager="plone.app.layout.viewlets.interfaces.IMainNavigation"
         class=".dropdown.DropdownMenuViewlet"
- 		layer=".interfaces.IXtshzzThemeSpecific" 
+ 		layer=".interfaces.IThemeSpecific" 
         permission="zope2.View"
         />
     
@@ -59,27 +59,16 @@
         for="*"
         permission="zope.Public"
         class="plone.batching.browser.PloneBatchView"
-    		 layer=".interfaces.IXtshzzThemeSpecific"        
+    		 layer=".interfaces.IThemeSpecific"        
         template="templates/batchnavigation_bootstrap.pt"
         /> 
  
   
-  <browser:viewlet
-    name="shuiwu.policy.reviewhistory"
-    manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
-    class=".review_history.ReviewViewlet"
-    layer=".interfaces.IXtshzzThemeSpecific"
-    permission="zope2.View"
-/>  
+
  	<browser:resourceDirectory
   name="shuiwu.policy"
   directory="static" />
 
-  <browser:page
-		name="xtshzz-policy-macros"
-		for="*"
-		permission="zope2.View"
-		class=".macros.Macros"/> 
 
 <!-- manage tools-->      
    <browser:page
@@ -104,29 +93,14 @@
       permission="cmf.ManagePortal"
       />          
 
-     
-   <z3c:widgetTemplate
-        mode="input"
- 		widget="collective.z3cform.datetimewidget.interfaces.IDateWidget"        
- 		layer=".interfaces.IXtshzzThemeSpecific"
- 		template="templates/date_input.pt" />
+
  		
-   <z3c:widgetTemplate
-        mode="input"
- 		widget="plone.formwidget.namedfile.interfaces.INamedFileWidget"        
- 		layer=".interfaces.IXtshzzThemeSpecific"
- 		template="templates/file_input.pt" />
- 		 		
-   <z3c:widgetTemplate
-        mode="input"
- 		widget="plone.formwidget.captcha.interfaces.ICaptchaWidget"        
- 		layer=".interfaces.IXtshzzThemeSpecific"
- 		template="templates/captcha_input.pt" /> 		
+	
 
 <include package="z3c.jbot" file="meta.zcml" />
 
 <browser:jbot
     directory="override"
- 		layer=".interfaces.IXtshzzThemeSpecific"    
+ 		layer=".interfaces.IThemeSpecific"    
      /> 
 </configure>

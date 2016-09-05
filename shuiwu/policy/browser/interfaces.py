@@ -4,7 +4,7 @@ from zope import schema
 from plone.theme.interfaces import IDefaultPloneLayer
 from shuiwu.policy import MessageFactory as _
 
-class IXtshzzThemeSpecific(Interface):
+class IThemeSpecific(Interface):
     """Marker interface that defines a ZTK browser layer. We can reference
     this in the 'layer' attribute of ZCML <browser:* /> directives to ensure
     the relevant registration only takes effect when this theme is installed.

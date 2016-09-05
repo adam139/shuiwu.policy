@@ -4,7 +4,7 @@
     
     <layer
         name="shuiwu.policy"
-        interface="shuiwu.policy.browser.interfaces.IXtshzzThemeSpecific"
+        interface="shuiwu.policy.browser.interfaces.IThemeSpecific"
         />
 
 </layers>
