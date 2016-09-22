@@ -15,11 +15,7 @@ from shuiwu.baoshui.content.nashuiren import Inashuiren
 
 class FrontpageView(sysAjaxListingView):
      
-#     grok.context(ISiteRoot)
-#     grok.template('ajax_listings_homepage')
-#     grok.name('index.html')
-#     grok.layer(IThemeSpecific)
-#     grok.require('zope2.View')      
+      
        
     def getPathQuery(self):
  
@@ -49,8 +45,7 @@ class search(ajaxsearch):
         start = int(datadic['start']) # batch search start position
         datekey = int(datadic['datetype'])  # 对应 最近一周，一月，一年……
         size = int(datadic['size'])      # batch search size          
-#         securitykey = int(datadic['security'])  #密级属性：公开/内部/机密
-#         tasktypekey = int(datadic['type']) #任务类型属性：分析/设计/实验/仿真/培训 
+
         tag = datadic['tag'].strip()
         sortcolumn = datadic['sortcolumn']
         sortdirection = datadic['sortdirection']

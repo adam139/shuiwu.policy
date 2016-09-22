@@ -30,7 +30,9 @@ class TestView(InitContents):
 
         browser.open(obj)
  
-        outstr = u"nashuiren1"
+        import pdb
+        pdb.set_trace()
+        outstr = '<tbody id="searchResultDiv">'
         
         self.assertTrue(outstr in browser.contents)          
         

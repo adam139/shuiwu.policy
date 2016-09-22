@@ -68,7 +68,7 @@ class IntegrationSitePolicy(SitePolicy):
         
     def setUpPloneSite(self, portal):
         applyProfile(portal, 'shuiwu.policy:default')
-#         applyProfile(portal, 'my315ok.socialorgnization:default')
+        applyProfile(portal, 'shuiwu.baoshui:default')
 #         applyProfile(portal, 'dexterity.membrane:default')
 #        applyProfile(portal, 'dexterity.membrane.content:example')
 
