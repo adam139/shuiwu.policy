@@ -7,8 +7,8 @@ from Products.CMFCore.interfaces import ISiteRoot
 
 from shuiwu.theme.interfaces import IThemeSpecific
 from shuiwu.baoshui.browser.ajax_listing import sysAjaxListingView,ajaxsearch
-# from shuiwu.memberArea.browser.workspace import WorkspaceView
 from shuiwu.baoshui.content.nashuiku import Inashuiku
+from shuiwu.baoshui.content.nashuiren import Inashuiren
 
 
 # grok.templatedir('templates')
@@ -57,6 +57,7 @@ class search(ajaxsearch):
         keyword = (datadic['searchabletext']).strip()     
 
         origquery = searchview.getPathQuery()
+        origquery['object_provides'] = Inashuiren.__identifier__
         origquery['sort_on'] = sortcolumn  
         origquery['sort_order'] = sortdirection
                 
