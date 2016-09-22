@@ -5,7 +5,7 @@
     xmlns:grok="http://namespaces.zope.org/grok"    
     i18n_domain="shuiwu.policy">
     
-  <grok:grok package="." />
+
   <include file="caching.zcml" />
   
     <include package="z3c.form" file="meta.zcml" />
@@ -16,15 +16,24 @@
       class=".homepage.FrontpageView"
       permission="zope.Public"
       layer="shuiwu.theme.interfaces.IThemeSpecific"       
-      template="templates/homepage.pt"
-/>      
+      template="templates/ajax_listings_homepage.pt"
+/>       
+   <browser:page
+      for="Products.CMFCore.interfaces.ISiteRoot"
+      name="ajax_db_search"
+      class=".homepage.search"
+ 	  layer="shuiwu.theme.interfaces.IThemeSpecific"       
+      permission="zope.Public"
+      />
+
   <browser:page
       for="*"
       name="footer"
       permission="zope.Public"
  	    layer=".interfaces.IThemeSpecific"       
       template="templates/footer.pt"
-      />      
+      />
+            
     <!-- The search box -->
     <browser:viewlet
         name="plone.searchbox"
@@ -32,27 +41,13 @@
         manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
         class=".common.SearchBoxViewlet"
         permission="zope2.View"
-        />    
-    
+        />     
 
         
-    <!-- override The breadcrumbs -->
-    <browser:viewlet
-        name="plone.path_bar"
-        manager="plone.app.layout.viewlets.interfaces.IAboveContent"
-        class=".common.PathBarViewlet"
-        layer=".interfaces.IThemeSpecific"
-        permission="zope2.View"
-        />        
+       
     <!-- Override global sections viewlet -->
 
-    <browser:viewlet
-        name="plone.global_sections"
-        manager="plone.app.layout.viewlets.interfaces.IMainNavigation"
-        class=".dropdown.DropdownMenuViewlet"
- 		layer=".interfaces.IThemeSpecific" 
-        permission="zope2.View"
-        />
+
     
   <browser:page
         name="batchnavigation"

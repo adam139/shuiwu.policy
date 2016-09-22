@@ -44,5 +44,43 @@ prefix="plone" />
         <element>roll</element>
     </value>    
   </records>
-
+<!-- navigation setting -->
+  <record name="plone.sitemap_depth" interface="Products.CMFPlone.interfaces.controlpanel.INavigationSchema" field="sitemap_depth">
+    <field type="plone.registry.field.Int">
+      <default>3</default>
+      <description xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="plone" ns0:translate="">Number of folder levels to show in the site map.</description>
+      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="plone" ns0:translate="">Sitemap depth</title>
+    </field>
+    <value>5</value>
+  </record>
+  <record name="plone.displayed_types" interface="Products.CMFPlone.interfaces.controlpanel.INavigationSchema" field="displayed_types">
+    <field type="plone.registry.field.Tuple">
+      <default>
+        <element>Image</element>
+        <element>File</element>
+        <element>Link</element>
+        <element>News Item</element>
+        <element>Folder</element>
+        <element>Document</element>
+        <element>Event</element>
+      </default>
+      <description xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="plone" ns0:translate="">The content types that should be shown in the navigation and site map.</description>
+      <required>False</required>
+      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="plone" ns0:translate="">Displayed content types</title>
+      <value_type type="plone.registry.field.Choice">
+        <vocabulary>plone.app.vocabularies.ReallyUserFriendlyTypes</vocabulary>
+      </value_type>
+    </field>
+    <value>
+      <element>Image</element>
+      <element>File</element>
+      <element>Link</element>
+      <element>News Item</element>
+      <element>Folder</element>
+      <element>Document</element>
+      <element>Event</element>
+      <element>shuiwu.baoshui.nashuirenku</element>
+      <element>shuiwu.baoshui.nashuiren</element>                                           
+    </value>
+  </record>
 </registry>

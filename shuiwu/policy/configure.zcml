@@ -11,7 +11,8 @@
   
   <i18n:registerTranslations directory="locales" />
     <include package=".patch" />
-    <include package=".browser" />
+
+    <include package=".browser" /> 
 
 
   <!-- -*- cusomize indexer -*- -->
@@ -40,6 +41,12 @@
       description="some initial steps"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />  
-      
+   <genericsetup:importStep
+        name="shuiwu.policy-postInstall"
+        title="shuiwu.policy post_install import step"
+        description="Post install import step from shuiwu.policy"
+        handler=".setuphandlers.post_install">
+        <depends name='typeinfo' />
+    </genericsetup:importStep>    
 
 </configure>

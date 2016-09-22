@@ -5,7 +5,4 @@
 	<property name="use_email_as_login" type="boolean">True</property>  
   
  </object>
- <object name="navtree_properties" meta_type="Plone Property Sheet">
-  <property name="enable_livesearch" type="boolean">False</property>  
- </object> 
 </object>

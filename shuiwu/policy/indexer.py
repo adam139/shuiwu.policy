@@ -7,5 +7,5 @@ from plone.app.contenttypes.interfaces import IDocument
 #disable Document text field indexer
 @indexer(IDocument)
 def indexer_code(obj, **kw):
-    return ""
+    return obj.guanlidaima
 
