@@ -16,9 +16,23 @@ class TestSetup(unittest.TestCase):
         portal = self.layer['portal']
         self.assertEqual("湘潭高新区地税局税务管理信息", portal.getProperty('description'))
    
-
+    def test_role_added(self):
+        portal = self.layer['portal']
+        self.assertTrue("ShuiguanyuanMember" in portal.validRoles())
      
-    
+    def test_staffmember_group_added(self):
+        portal = self.layer['portal']
+        acl_users = portal['acl_users']
+        
+        self.assertEqual(1, len(acl_users.searchGroups(name='Shuiguanyuan')))
+
+    def test_add_nashuiren_permission_for_Shuiguanyuan(self):
+        portal = self.layer['portal']
+        
+        self.assertTrue('shuiwu.baoshui:Add nashuiren' in [r['name'] for r in 
+                                portal.permissionsOfRole('ShuiguanyuanMember')
+                                if r['selected']])
+            
     def test_Requirements_installed(self):
         portal = self.layer['portal']
         portal_types = getToolByName(portal, 'portal_types')
