@@ -8,13 +8,13 @@
 
   <include file="caching.zcml" />
   
-    <include package="z3c.form" file="meta.zcml" />
-    <include package="z3c.form" />  
+    <include package="shuiwu.baoshui" file="permissions.zcml" />
+ 
   <browser:page
       for="Products.CMFCore.interfaces.ISiteRoot"
       name="index.html"
       class=".homepage.FrontpageView"
-      permission="zope.Public"
+      permission="shuiwu.baoshui.view_shuiwusummary"
       layer="shuiwu.theme.interfaces.IThemeSpecific"       
       template="templates/ajax_listings_homepage.pt"
 />       
@@ -46,8 +46,6 @@
         
        
     <!-- Override global sections viewlet -->
-
-
     
   <browser:page
         name="batchnavigation"
@@ -56,8 +54,7 @@
         class="plone.batching.browser.PloneBatchView"
     		 layer=".interfaces.IThemeSpecific"        
         template="templates/batchnavigation_bootstrap.pt"
-        /> 
- 
+        />
   
 
  	<browser:resourceDirectory
@@ -86,16 +83,7 @@
       class=".manage_tools.setDate"
       layer="zope.interface.Interface"       
       permission="cmf.ManagePortal"
-      />          
+      />      	
 
 
- 		
-	
-
-<include package="z3c.jbot" file="meta.zcml" />
-
-<browser:jbot
-    directory="override"
- 		layer=".interfaces.IThemeSpecific"    
-     /> 
 </configure>

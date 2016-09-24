@@ -4,8 +4,7 @@ from zope.lifecycleevent import ObjectModifiedEvent
 from plone import api
 from plone.app.dexterity.behaviors import constrains
 from logging import getLogger
-
-
+from Products.CMFCore.utils import getToolByName
 from z3c.relationfield import RelationValue
 from zope.component import getUtility
 from zope.intid import IntIds
@@ -13,7 +12,12 @@ from zope.intid.interfaces import IIntIds
 
 logger = getLogger(__name__)
 
-
+def setupGroups(portal):
+    acl_users = getToolByName(portal, 'acl_users')
+    if not acl_users.searchGroups(name='Shuiguanyuan'):
+        gtool = getToolByName(portal, 'portal_groups')
+        gtool.addGroup('Shuiguanyuan', roles=['ShuiguanyuanMember'])
+        
 STRUCTURE = [
     {
         'type': 'shuiwu.baoshui.nashuiku',
@@ -154,7 +158,9 @@ def post_install(context):
 
     for item in STRUCTURE:
         _create_content(item, portal)
-#     set relation
+#     add group
+    setupGroups(portal)
+
              
                 
 
