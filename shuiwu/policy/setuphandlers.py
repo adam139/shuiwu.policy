@@ -9,6 +9,7 @@ from z3c.relationfield import RelationValue
 from zope.component import getUtility
 from zope.intid import IntIds
 from zope.intid.interfaces import IIntIds
+import datetime
 
 logger = getLogger(__name__)
 
@@ -26,6 +27,7 @@ STRUCTURE = [
         'description': u'纳税人税务申报信息登记库',
         'layout': 'sysajax_listings',
         'children': [
+
                      {
             'type': 'shuiwu.baoshui.nashuiren',
             'id': 'nashuiren1',            
@@ -34,26 +36,7 @@ STRUCTURE = [
             'guanlidaima':'888201',
             'shuiguanyuan':'税管员1',
             'danganbianhao':'1001',
-            'layout': 'nashuiren_view',
-                      },
-                     {
-            'type': 'shuiwu.baoshui.nashuiren',
-            'id': 'nashuiren1',            
-            'title': u'纳税人1',
-            'description': u'一科',            
-            'guanlidaima':'888201',
-            'shuiguanyuan':'税管员1',
-            'danganbianhao':'1001',
-            'layout': 'nashuiren_view',
-                      },
-                     {
-            'type': 'shuiwu.baoshui.nashuiren',
-            'id': 'nashuiren2',            
-            'title': u'纳税人2',
-            'description': u'一科',            
-            'guanlidaima':'888202',
-            'shuiguanyuan':'税管员1',
-            'danganbianhao':'1002',
+            'dengjiriqi':datetime.datetime.today(),
             'layout': 'nashuiren_view',
                       },
                      {
@@ -64,6 +47,7 @@ STRUCTURE = [
             'guanlidaima':'888203',
             'shuiguanyuan':'税管员3',
             'danganbianhao':'1003',
+            'dengjiriqi':datetime.datetime.today(),
             'layout': 'nashuiren_view',
                       },
                      {
@@ -74,6 +58,7 @@ STRUCTURE = [
             'guanlidaima':'888204',
             'shuiguanyuan':'税管员4',
             'danganbianhao':'1004',
+            'dengjiriqi':datetime.datetime.today(),
             'layout': 'nashuiren_view',
                       },
                      {
@@ -84,36 +69,7 @@ STRUCTURE = [
             'guanlidaima':'888205',
             'shuiguanyuan':'税管员1',
             'danganbianhao':'1005',
-            'layout': 'nashuiren_view',
-                      },
-                     {
-            'type': 'shuiwu.baoshui.nashuiren',
-            'id': 'nashuiren6',            
-            'title': u'纳税人6',
-            'description': u'二科',            
-            'guanlidaima':'888206',
-            'shuiguanyuan':'税管员2',
-            'danganbianhao':'1006',
-            'layout': 'nashuiren_view',
-                      },
-                     {
-            'type': 'shuiwu.baoshui.nashuiren',
-            'id': 'nashuiren7',            
-            'title': u'纳税人7',
-            'description': u'二科',            
-            'guanlidaima':'888207',
-            'shuiguanyuan':'税管员2',
-            'danganbianhao':'1007',
-            'layout': 'nashuiren_view',
-                      },
-                     {
-            'type': 'shuiwu.baoshui.nashuiren',
-            'id': 'nashuiren8',            
-            'title': u'纳税人8',
-            'description': u'二科',            
-            'guanlidaima':'888208',
-            'shuiguanyuan':'税管员2',
-            'danganbianhao':'1008',
+            'dengjiriqi':datetime.datetime.today(),
             'layout': 'nashuiren_view',
                       },
                      {
@@ -124,6 +80,7 @@ STRUCTURE = [
             'guanlidaima':'888209',
             'shuiguanyuan':'税管员2',
             'danganbianhao':'1009',
+            'dengjiriqi':datetime.datetime.today(),
             'layout': 'nashuiren_view',
                       }                                                                                                                                                              
                 ]
@@ -181,10 +138,12 @@ def _create_content(item, container):
             type=item['type'],
             container=container,
             title=item['title'],
-            description=item['description'],            
+            description=item['description'],           
             id=item['id'],
             safe_id=False)
         logger.info('Created item {}'.format(new.absolute_url()))
+    if item.get('dengjiriqi', False):
+        new.dengjiriqi = item['dengjiriqi']
     if item.get('layout', False):
         new.setLayout(item['layout'])
     if item.get('default-page', False):
