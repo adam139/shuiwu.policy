@@ -12,11 +12,7 @@
   <i18n:registerTranslations directory="locales" />
     <include package=".patch" />
 
-    <include package=".browser" /> 
-
-
-  <!-- -*- cusomize indexer -*- -->
-    <adapter factory=".indexer.indexer_code" name="guanlidaima" /> 
+    <include package=".browser" />
 
   <genericsetup:registerProfile
       name="default"

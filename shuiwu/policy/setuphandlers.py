@@ -15,9 +15,16 @@ logger = getLogger(__name__)
 
 def setupGroups(portal):
     acl_users = getToolByName(portal, 'acl_users')
+#     acl_users = api.portal.get_tool(name='acl_users')
     if not acl_users.searchGroups(name='Shuiguanyuan'):
+#         group = api.group.create(
+#                                  groupname='Shuiguanyuan',
+#                                  title='shui shou guanli renyuan',
+#                                  description='',
+#                                  roles=['ShuiguanyuanMember', ],
+#                                  )
         gtool = getToolByName(portal, 'portal_groups')
-        gtool.addGroup('Shuiguanyuan', roles=['ShuiguanyuanMember'])
+        gtool.addGroup('Shuiguanyuan', roles=['ShuiguanyuanMember','Reader','Editor'])
         
 STRUCTURE = [
     {
@@ -47,28 +54,6 @@ STRUCTURE = [
             'guanlidaima':'888203',
             'shuiguanyuan':'税管员3',
             'danganbianhao':'1003',
-            'dengjiriqi':datetime.datetime.today(),
-            'layout': 'nashuiren_view',
-                      },
-                     {
-            'type': 'shuiwu.baoshui.nashuiren',
-            'id': 'nashuiren4',            
-            'title': u'纳税人4',
-            'description': u'一科',            
-            'guanlidaima':'888204',
-            'shuiguanyuan':'税管员4',
-            'danganbianhao':'1004',
-            'dengjiriqi':datetime.datetime.today(),
-            'layout': 'nashuiren_view',
-                      },
-                     {
-            'type': 'shuiwu.baoshui.nashuiren',
-            'id': 'nashuiren5',            
-            'title': u'纳税人5',
-            'description': u'一科',            
-            'guanlidaima':'888205',
-            'shuiguanyuan':'税管员1',
-            'danganbianhao':'1005',
             'dengjiriqi':datetime.datetime.today(),
             'layout': 'nashuiren_view',
                       },
@@ -117,6 +102,14 @@ def post_install(context):
         _create_content(item, portal)
 #     add group
     setupGroups(portal)
+    for i in range(1,5): 
+        user = api.user.create(
+                               username='test%s' % i,
+#                                fullname=u'张测%s',
+                               email='test%s@plone.org' % i,
+                               password='secret',
+                               )        
+        api.group.add_user(groupname='Shuiguanyuan', username='test%s' % i)
 
              
                 
