@@ -34,11 +34,10 @@ def createChildTree(context):
     pc = getToolByName(context, "portal_catalog")
     query = {"object_provides":Inashuiren.__identifier__}
     bns = pc(query)
+    bns = filter(pathsearchFilter,bns)
     if len(bns) > 100:
-        bns = bns[:99]
-
-    emptysubtreelists = filter(pathsearchFilter,bns)
-    finishlist = map(mapf,emptysubtreelists)
+        bns = bns[:99]    
+    finishlist = map(mapf,bns)
         
 def getTargetobj(context,objid):
     "get target nashuiren object that has been created sub tree by object id"
