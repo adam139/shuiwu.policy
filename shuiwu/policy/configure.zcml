@@ -43,6 +43,13 @@
         description="Post install import step from shuiwu.policy"
         handler=".setuphandlers.post_install">
         <depends name='typeinfo' />
-    </genericsetup:importStep>    
+    </genericsetup:importStep>
+  <genericsetup:upgradeStep
+      title="Add sub tree for nashuiren"
+      description="update step to add sub tree for nashuiren."
+      source="1002"
+      destination="1003"
+      handler="shuiwu.policy.migration.createChildTree"
+      profile="shuiwu.baoshui:default"/>       
 
 </configure>
