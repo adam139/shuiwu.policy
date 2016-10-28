@@ -108,7 +108,8 @@
             		<tr data-toggle="tooltip" title="点击排序">
             			<th class="col-md-1 text-center">序号</th>
             			<th class="col-md-3 text-left">名称</th>
-            			<th class="col-md-7 text-left">归属科室</th>
+            			<th class="col-md-3 text-left">纳税人识别号</th>            			
+            			<th class="col-md-4 text-left">归属科室</th>
             			<th class="col-md-1 text-center">日期</th>
             		</tr>
             	</thead>
