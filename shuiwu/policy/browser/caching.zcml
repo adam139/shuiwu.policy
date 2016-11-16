@@ -4,9 +4,10 @@
     i18n_domain="shuiwu.policy">
     
     <include package="z3c.caching" file="meta.zcml" />
+    <include package="shuiwu.baoshui" />
 
     <cache:ruleset
         for=".homepage.FrontpageView"
-        ruleset="plone.content.itemView"
+        ruleset="plone.homepage"
         />    
 </configure>
