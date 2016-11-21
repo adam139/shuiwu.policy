@@ -51,5 +51,11 @@
       destination="1003"
       handler="shuiwu.policy.migration.createChildTree"
       profile="shuiwu.baoshui:default"/>       
-
+  <genericsetup:upgradeStep
+      title="Add niandu container to nashuiren"
+      description="update step to add niandu container to nashuiren."
+      source="1003"
+      destination="1004"
+      handler="shuiwu.policy.migration.appendNianduContainer"
+      profile="shuiwu.baoshui:default"/> 
 </configure>

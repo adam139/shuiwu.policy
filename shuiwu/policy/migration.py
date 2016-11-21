@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from plone import api
 from Products.CMFCore.utils import getToolByName
+import datetime
 from shuiwu.baoshui.content.nashuiren import Inashuiren
 
 subids = [('zichanfuzaibiao1','yuedujilu',u'资产负债表',12),
@@ -65,7 +66,34 @@ def pathsearchFilter(brain):
     if len(bns) <= 1:
         return True
     else:
-        return False       
+        return False
+    
+def appendNianduContainer(context): 
+    "niandu object append to nashuiren container"
+    pc = getToolByName(context, "portal_catalog")
+    query = {"object_provides":Inashuiren.__identifier__}
+    bns = pc(query)
+#     bns = filter(pathsearchFilter,bns)
+    if len(bns) > 100:
+        bns = bns[:99]    
+    finishlist = map(mapc,bns)              
+
+def mapc(brain):
+    "new create niandu container and move nashuiren's children to it"
+
+    target = brain.getObject()
+    
+    target = api.content.create(
+    id = datetime.datetime.today().strftime("%Y"),
+    type='shuiwu.baoshui.niandu',
+    title=u'年度记录',
+    container=target)
+          
+    subbrains = api.content.find(
+    context=target, depth=1)
+    for subbrain in subbrains:
+        subobj = subbrain.getObject()
+        api.content.move(source=subobj, target=target)
 
 
         
