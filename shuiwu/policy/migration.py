@@ -3,6 +3,7 @@ from plone import api
 from Products.CMFCore.utils import getToolByName
 import datetime
 from shuiwu.baoshui.content.nashuiren import Inashuiren
+from shuiwu.baoshui.content.niandu import Iniandu
 
 subids = [('zichanfuzaibiao1','yuedujilu',u'资产负债表',12),
                ('lirunbiao1','yuedujilu',u'利润表',12),
@@ -68,12 +69,27 @@ def pathsearchFilter(brain):
     else:
         return False
     
+def notexistsearchFilter(brain):
+    "if not exist niandu object,return True,else return False"
+    context = brain.getObject()
+    pc = getToolByName(context, "portal_catalog")
+    query = {"object_provides":Iniandu.__identifier__}
+#     query['object_provides'] = Iniandu.__identifier__
+#     query = {"path":"/".join(context.getPhysicalPath())}
+    bns = pc(query)
+    if len(bns) <= 1:
+        return True
+    else:
+        return False
+        
 def appendNianduContainer(context): 
     "niandu object append to nashuiren container"
     pc = getToolByName(context, "portal_catalog")
     query = {"object_provides":Inashuiren.__identifier__}
     bns = pc(query)
-#     bns = filter(pathsearchFilter,bns)
+#     import pdb
+#     pdb.set_trace()
+    bns = filter(notexistsearchFilter,bns)
     if len(bns) > 100:
         bns = bns[:99]    
     finishlist = map(mapc,bns)              
@@ -95,10 +111,38 @@ def mapc(brain):
         subobj = subbrain.getObject()
         api.content.move(source=subobj, target=target)
 
-
-        
-        
+# reset guishu keshi
+model = u'湖南省湘潭高新技术产业开发区地方税务局'.encode('utf-8')
+def resetDescription(context):
+    "湖南省湘潭高新技术产业开发区地方税务局税源管理三科 change to 税源管理三科"
     
+    pc = getToolByName(context, "portal_catalog")
+    query = {"object_provides":Inashuiren.__identifier__}
+    bns = pc(query)
+#     import pdb
+#     pdb.set_trace()
+    bns = filter(zipFilter,bns)
+    if len(bns) > 100:
+        bns = bns[:99]    
+    finishlist = map(mapf,bns)      
+        
+def zipFilter(brain):
+    "if description field  exist '湖南省湘潭高新技术产业开发区地方税务局' ,return True,else return False"
+    des = brain.Description
+    if model in des:
+        return True
+    else:
+        return False        
+
+def mapf(brain):
+    "replace"
+
+    target = brain.getObject()
+    des = target.description
+    newd = des.replace(model,'')
+    target.description = newd
+    target.reindexObject(idxs=['description'])
+  
     
     
 
