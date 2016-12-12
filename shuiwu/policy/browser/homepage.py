@@ -1,5 +1,5 @@
 #-*- coding: UTF-8 -*-
-# from five import grok
+from five import grok
 import json
 from plone.memoize.instance import memoize
 from zope.component import getMultiAdapter
@@ -19,7 +19,7 @@ class FrontpageView(sysAjaxListingView):
        
     def getPathQuery(self):
  
-        """返回 知识库目录
+        """返回 纳税人库目录
         """
         query = {}
         db = self.getDBFolder()
@@ -35,7 +35,6 @@ class FrontpageView(sysAjaxListingView):
         return context        
         
 class search(ajaxsearch):
-    
     
     def render(self):    
 #        self.portal_state = getMultiAdapter((self.context, self.request), name=u"plone_portal_state")
@@ -54,8 +53,7 @@ class search(ajaxsearch):
         origquery = searchview.getPathQuery()
         origquery['object_provides'] = Inashuiren.__identifier__
         origquery['sort_on'] = sortcolumn  
-        origquery['sort_order'] = sortdirection
-                
+        origquery['sort_order'] = sortdirection                
  #模糊搜索       
         if keyword != "":
             origquery['SearchableText'] = '*'+keyword+'*'        
@@ -102,5 +100,48 @@ class search(ajaxsearch):
 #call output function        
         data = self.output(start,size,totalnum, braindata)
         self.request.response.setHeader('Content-Type', 'application/json')
-        return json.dumps(data)     
-            
+        return json.dumps(data)
+    
+    def output(self,start,size,totalnum,braindata):
+        "根据参数total,braindata,返回jason 输出"
+        outhtml = ""      
+
+        import datetime
+        id = datetime.datetime.today().strftime("%Y")
+        for i in braindata:          
+            out = """<tr>
+                                <td class="col-md-1">%(shibiehao)s</td>
+                                <td class="col-md-1"><a href="%(objurl)s">%(title)s</a></td>
+                                <td class="col-md-1">%(type)s</td>
+                                <td class="col-md-1">%(description)s</td>
+                                <td class="col-md-1">%(shuiguanyuan)s</td>
+                                <td class="col-md-1">%(danganbianhao)s</td>
+                                <td class="col-md-1">%(status)s</td>
+                                <td class="col-md-1">%(date)s</td>
+                                <td class="col-md-1">%(caiwufuzeren)s</td>
+                                <td class="col-md-1">%(caiwufuzerendianhua)s</td>
+                                <td class="col-md-1">%(banshuiren)s</td>
+                                <td class="col-md-1">%(banshuirendianhua)s</td>                                
+                            </tr> """% dict(objurl="%s/%s" % (i.getURL(),id),                                            
+                                            title=i.Title,
+                                            shibiehao = i.guanlidaima,
+                                            type = i.type,
+                                            shuiguanyuan = i.shuiguanyuan,
+                                            danganbianhao = i.danganbianhao,
+                                            status = i.status,
+                                            caiwufuzeren = i.caiwufuzeren,
+                                            caiwufuzerendianhua = i.caiwufuzerendianhua,
+                                            banshuiren = i.banshuiren,
+                                            banshuirendianhua = i.banshuirendianhua,
+                                            description= i.Description,
+                                            date = i.dengjiriqi)           
+            outhtml = "%s%s" %(outhtml ,out)
+
+           
+        data = {'searchresult': outhtml,'start':start,'size':size,'total':totalnum}
+        return data    
+         
+class TagSearchView(FrontpageView):
+    "统计查询视图"
+    
+                   

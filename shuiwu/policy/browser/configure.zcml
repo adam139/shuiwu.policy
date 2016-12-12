@@ -16,7 +16,15 @@
       class=".homepage.FrontpageView"
       permission="shuiwu.baoshui.view_shuiwusummary"
       layer="shuiwu.theme.interfaces.IThemeSpecific"       
-      template="templates/ajax_listings_homepage.pt"
+      template="templates/total_ajax_listings.pt"
+/>
+  <browser:page
+      for="Products.CMFCore.interfaces.ISiteRoot"
+      name="total.html"
+      class=".homepage.TagSearchView"
+      permission="shuiwu.baoshui.view_shuiwusummary"
+      layer="shuiwu.theme.interfaces.IThemeSpecific"       
+      template="templates/total_ajax_listings.pt"
 />       
    <browser:page
       for="Products.CMFCore.interfaces.ISiteRoot"
@@ -25,6 +33,7 @@
  	  layer="shuiwu.theme.interfaces.IThemeSpecific"       
       permission="zope.Public"
       />
+      
 
   <browser:page
       for="*"
