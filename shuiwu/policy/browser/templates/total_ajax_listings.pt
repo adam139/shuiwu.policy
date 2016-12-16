@@ -41,7 +41,7 @@
 			<input type="hidden" value="created" id="solrSortColumn">
 			<input type="hidden" value="reverse" id="solrSortDirection">
 			<ul class="row list-inline" id="dateRangeSearchUl">
-				<li class="title">按日期：</li>
+				<li class="title">按修改日期：</li>
 				<li class="all">
 					<span class="over" data-name="0"><a class="btn btn-primary" href="javascript:void(0)" role="button">所有</a></span>
 				</li>
