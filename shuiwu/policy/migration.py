@@ -81,6 +81,15 @@ def notexistsearchFilter(brain):
         return True
     else:
         return False
+    
+def notmoveFilter(brain):
+    "if not exist niandu object,return True,else return False"
+    context = brain.getObject()
+    bns = api.content.find(context=context,depth=1)
+    if len(bns) > 1:
+        return True
+    else:
+        return False
         
 def appendNianduContainer(context): 
     "niandu object append to nashuiren container"
@@ -88,9 +97,9 @@ def appendNianduContainer(context):
     query = {"object_provides":Inashuiren.__identifier__}
     bns = pc(query)
 
-#     bns = filter(notexistsearchFilter,bns)
-#     if len(bns) > 1000:
-#         bns = bns[:999]    
+    bns = filter(notmoveFilter,bns)
+    if len(bns) > 100:
+        bns = bns[:99]    
     finishlist = map(mapc,bns)              
 
 def mapc(brain):
