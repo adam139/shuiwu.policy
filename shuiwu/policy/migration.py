@@ -107,9 +107,11 @@ def mapc(brain):
           
     target = target['2016']
     subbrains = api.content.find(
-    object_provides !=Iniandu,
+    portal_type !="shuiwu.baoshui.niandu",
     context=target,
     depth=1)
+    import pdb
+    pdb.set_trace()
     for subbrain in subbrains:
         subobj = subbrain.getObject()
         api.content.move(source=subobj, target=target)
