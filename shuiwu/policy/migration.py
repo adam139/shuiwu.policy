@@ -87,11 +87,10 @@ def appendNianduContainer(context):
     pc = getToolByName(context, "portal_catalog")
     query = {"object_provides":Inashuiren.__identifier__}
     bns = pc(query)
-    import pdb
-    pdb.set_trace()
+
 #     bns = filter(notexistsearchFilter,bns)
-#     if len(bns) > 100:
-#         bns = bns[:99]    
+#     if len(bns) > 1000:
+#         bns = bns[:999]    
     finishlist = map(mapc,bns)              
 
 def mapc(brain):
@@ -105,17 +104,13 @@ def mapc(brain):
 #     title=u'年度记录',
 #     container=target)
           
-    target = obj[id]
-    import pdb
-    pdb.set_trace()    
+    target = obj[id]   
     subbrains = api.content.find(context=obj,depth=1)
 
     for subbrain in subbrains:
         if subbrain.id == id: continue
         subobj = subbrain.getObject()
-        api.content.move(source=subobj, target=target)
-        s2 = 1
-        
+        api.content.move(source=subobj, target=target)        
 
 # reset guishu keshi
 model = u'湖南省湘潭高新技术产业开发区地方税务局'.encode('utf-8')
