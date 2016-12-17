@@ -97,7 +97,7 @@ def appendNianduContainer(context):
 def mapc(brain):
     "new create niandu container and move nashuiren's children to it"
 
-    target = brain.getObject()
+    obj = brain.getObject()
     id = datetime.datetime.today().strftime("%Y")    
 #     target = api.content.create(
 #     id = id
@@ -105,10 +105,10 @@ def mapc(brain):
 #     title=u'年度记录',
 #     container=target)
           
-    target = target[id]
-    import pdb
-    pdb.set_trace()    
-    subbrains = api.content.find(context=target,depth=1)
+    target = obj[id]
+#     import pdb
+#     pdb.set_trace()    
+    subbrains = api.content.find(context=obj,depth=1)
 
     for subbrain in subbrains:
         if subbrain.id == id: continue
