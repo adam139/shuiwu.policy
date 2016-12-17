@@ -99,12 +99,13 @@ def mapc(brain):
 
     target = brain.getObject()
     
-    target = api.content.create(
-    id = datetime.datetime.today().strftime("%Y"),
-    type='shuiwu.baoshui.niandu',
-    title=u'年度记录',
-    container=target)
+#     target = api.content.create(
+#     id = datetime.datetime.today().strftime("%Y"),
+#     type='shuiwu.baoshui.niandu',
+#     title=u'年度记录',
+#     container=target)
           
+    target = target['2016']
     subbrains = api.content.find(
     object_provides !=Iniandu,
     context=target,
