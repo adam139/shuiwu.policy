@@ -100,19 +100,18 @@ def mapc(brain):
     target = brain.getObject()
     
 #     target = api.content.create(
-#     id = datetime.datetime.today().strftime("%Y"),
+    id = datetime.datetime.today().strftime("%Y"),
 #     type='shuiwu.baoshui.niandu',
 #     title=u'年度记录',
 #     container=target)
           
     target = target['2016']
-    subbrains = api.content.find(
-    portal_type !="shuiwu.baoshui.niandu",
-    context=target,
-    depth=1)
-    import pdb
-    pdb.set_trace()
+#     import pdb
+#     pdb.set_trace()    
+    subbrains = api.content.find(context=target,depth=1)
+
     for subbrain in subbrains:
+        if subbrain.id == id: continue
         subobj = subbrain.getObject()
         api.content.move(source=subobj, target=target)
 
