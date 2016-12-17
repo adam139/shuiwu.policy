@@ -87,8 +87,8 @@ def appendNianduContainer(context):
     pc = getToolByName(context, "portal_catalog")
     query = {"object_provides":Inashuiren.__identifier__}
     bns = pc(query)
-#     import pdb
-#     pdb.set_trace()
+    import pdb
+    pdb.set_trace()
 #     bns = filter(notexistsearchFilter,bns)
 #     if len(bns) > 100:
 #         bns = bns[:99]    
