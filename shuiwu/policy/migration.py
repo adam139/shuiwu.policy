@@ -129,7 +129,7 @@ def resetDescription(context):
 def zipFilter(brain):
     "if description field  exist '湖南省湘潭高新技术产业开发区地方税务局' ,return True,else return False"
     des = brain.Description
-    if des.isinstance(title, unicode):
+    if isinstance(des, unicode):
         des = des.encode('utf-8')
     if model in des:
         return True
@@ -141,7 +141,7 @@ def mapf(brain):
 
     target = brain.getObject()
     des = target.description
-    if des.isinstance(title, unicode):
+    if isinstance(des, unicode):
         des = des.encode('utf-8')
     newd = des.replace(model,'')
     target.description = newd
