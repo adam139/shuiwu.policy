@@ -105,9 +105,9 @@ def mapc(brain):
 #     title=u'年度记录',
 #     container=target)
           
-    target = target['2016']
-#     import pdb
-#     pdb.set_trace()    
+    target = target[id]
+    import pdb
+    pdb.set_trace()    
     subbrains = api.content.find(context=target,depth=1)
 
     for subbrain in subbrains:
