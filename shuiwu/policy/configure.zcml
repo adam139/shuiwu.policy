@@ -60,7 +60,7 @@
       profile="shuiwu.baoshui:default"/>
   <genericsetup:upgradeStep
       title="replace nashuiren description"
-      description="update step eplace nashuiren description."
+      description="update step replace nashuiren description."
       source="1003"
       destination="1004"
       handler="shuiwu.policy.migration.resetDescription"

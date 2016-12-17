@@ -119,8 +119,8 @@ def resetDescription(context):
     pc = getToolByName(context, "portal_catalog")
     query = {"object_provides":Inashuiren.__identifier__}
     bns = pc(query)
-#     import pdb
-#     pdb.set_trace()
+    import pdb
+    pdb.set_trace()
     bns = filter(zipFilter,bns)
     if len(bns) > 5:
         bns = bns[:4]    
