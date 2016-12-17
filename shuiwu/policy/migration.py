@@ -114,6 +114,8 @@ def mapc(brain):
         if subbrain.id == id: continue
         subobj = subbrain.getObject()
         api.content.move(source=subobj, target=target)
+        s2 = 1
+        
 
 # reset guishu keshi
 model = u'湖南省湘潭高新技术产业开发区地方税务局'.encode('utf-8')
