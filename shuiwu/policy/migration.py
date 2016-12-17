@@ -98,9 +98,9 @@ def mapc(brain):
     "new create niandu container and move nashuiren's children to it"
 
     target = brain.getObject()
-    
+    id = datetime.datetime.today().strftime("%Y")    
 #     target = api.content.create(
-    id = datetime.datetime.today().strftime("%Y"),
+#     id = id
 #     type='shuiwu.baoshui.niandu',
 #     title=u'年度记录',
 #     container=target)
