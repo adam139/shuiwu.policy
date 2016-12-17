@@ -106,8 +106,8 @@ def mapc(brain):
 #     container=target)
           
     target = obj[id]
-#     import pdb
-#     pdb.set_trace()    
+    import pdb
+    pdb.set_trace()    
     subbrains = api.content.find(context=obj,depth=1)
 
     for subbrain in subbrains:
