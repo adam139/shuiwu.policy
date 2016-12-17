@@ -57,5 +57,12 @@
       source="1003"
       destination="1004"
       handler="shuiwu.policy.migration.appendNianduContainer"
-      profile="shuiwu.baoshui:default"/> 
+      profile="shuiwu.baoshui:default"/>
+  <genericsetup:upgradeStep
+      title="replace nashuiren description"
+      description="update step eplace nashuiren description."
+      source="1003"
+      destination="1004"
+      handler="shuiwu.policy.migration.resetDescription"
+      profile="shuiwu.baoshui:default"/>       
 </configure>

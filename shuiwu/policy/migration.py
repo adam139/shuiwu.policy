@@ -75,9 +75,9 @@ def notexistsearchFilter(brain):
     pc = getToolByName(context, "portal_catalog")
     query = {"object_provides":Iniandu.__identifier__}
 #     query['object_provides'] = Iniandu.__identifier__
-#     query = {"path":"/".join(context.getPhysicalPath())}
+    query["path"] = "/".join(context.getPhysicalPath())
     bns = pc(query)
-    if len(bns) <= 1:
+    if len(bns) < 1:
         return True
     else:
         return False
@@ -90,8 +90,8 @@ def appendNianduContainer(context):
 #     import pdb
 #     pdb.set_trace()
     bns = filter(notexistsearchFilter,bns)
-    if len(bns) > 100:
-        bns = bns[:99]    
+#     if len(bns) > 100:
+#         bns = bns[:99]    
     finishlist = map(mapc,bns)              
 
 def mapc(brain):
@@ -122,13 +122,15 @@ def resetDescription(context):
 #     import pdb
 #     pdb.set_trace()
     bns = filter(zipFilter,bns)
-    if len(bns) > 100:
-        bns = bns[:99]    
+    if len(bns) > 5:
+        bns = bns[:4]    
     finishlist = map(mapf,bns)      
         
 def zipFilter(brain):
     "if description field  exist '湖南省湘潭高新技术产业开发区地方税务局' ,return True,else return False"
     des = brain.Description
+    if des.isinstance(title, unicode):
+        des = des.encode('utf-8')
     if model in des:
         return True
     else:
@@ -139,6 +141,8 @@ def mapf(brain):
 
     target = brain.getObject()
     des = target.description
+    if des.isinstance(title, unicode):
+        des = des.encode('utf-8')
     newd = des.replace(model,'')
     target.description = newd
     target.reindexObject(idxs=['description'])
