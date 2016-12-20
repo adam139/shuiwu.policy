@@ -13,10 +13,10 @@ def createChildTree(context):
     pc = getToolByName(context, "portal_catalog")
     query = {"object_provides":Inashuiren.__identifier__}
     bns = pc(query)
-    bns = filter(everypathsearchFilter,bns)
-    if len(bns) > 5000:
-        bns = bns[:4999]    
-    finishlist = map(map_build_subtree,bns)
+    bns = map_build_subtree(map_build_subtree,filter(everypathsearchFilter,bns))
+#     if len(bns) > 5000:
+#         bns = bns[:4999]    
+#     finishlist = map(map_build_subtree,bns)
         
 def getTargetobj(context,objid):
     "get target nashuiren object that has been created sub tree by object id"
@@ -119,10 +119,10 @@ def appendNianduContainer(context):
     query = {"object_provides":Inashuiren.__identifier__}
     bns = pc(query)
 
-    bns = filter(notmoveFilter,bns)
-    if len(bns) > 100:
-        bns = bns[:99]    
-    finishlist = map(mapc,bns)              
+    bns = map(mapc,filter(notmoveFilter,bns))
+#     if len(bns) > 100:
+#         bns = bns[:99]    
+#     finishlist = map(mapc,bns)              
 
 def mapc(brain):
     "new create niandu container and move nashuiren's children to it"
