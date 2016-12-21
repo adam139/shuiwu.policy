@@ -6,6 +6,19 @@ from shuiwu.baoshui.content.nashuiren import Inashuiren
 from shuiwu.baoshui.content.niandu import Iniandu
 from shuiwu.baoshui.subscriber import subids
 
+def build_index_nashuiren(context):
+    "for nashuiren rebuild indexs"
+    #search all nashuiren objects that have not sub object
+    pc = getToolByName(context, "portal_catalog")
+    query = {"object_provides":Inashuiren.__identifier__}
+    bns = pc(query)
+    finished = map(rebuild_index,bns)
+    
+def rebuild_index(brain):
+    obj = brain.getObject()
+    obj.reindexObject(idxs=["Subject","Title","Description","status","regtype","shuiguanyuan",
+                            "caiwufuzeren","caiwufuzerendianhua","banshuiren","banshuirendianhua",
+                            "guanlidaima","dengjiriqi"])      
 
 def createChildTree(context):
     "for nashuiren create sub-child-tree"
@@ -41,7 +54,7 @@ def map_build_subtree(brain):
 #     id = datetime.datetime.today().strftime("%Y"),
     id = '2017',
     type='shuiwu.baoshui.niandu',
-    title=u'%s年度记录' % id,
+    title=u'年度记录',
     container=obj)
     status = obj.status
     description = obj.description
@@ -61,7 +74,7 @@ def map_build_subtree(brain):
         init_tags.append(tag)
     subjects = yuedu_subjects + jidu_subjects + ling_subjects + init_tags   
     obj.setSubject(tuple(subjects))                        
-    obj.reindexObject()
+    obj.reindexObject(idxs=["Subject"])
    # Put the tasks into the queue as a tuple
     for subid,title in subids:
         title = title.encode('utf-8')
@@ -145,6 +158,7 @@ def mapc(brain):
 
 # reset guishu keshi
 model = u'湖南省湘潭高新技术产业开发区地方税务局'.encode('utf-8')
+
 def resetDescription(context):
     "湖南省湘潭高新技术产业开发区地方税务局税源管理三科 change to 税源管理三科"
     
@@ -179,7 +193,40 @@ def mapf(brain):
     target.description = newd
     target.reindexObject(idxs=['description'])
   
+# reset title for niandu
+modelid = "%s" % id
+def resetTitle(context):
+    "湖南省湘潭高新技术产业开发区地方税务局税源管理三科 change to 税源管理三科"
     
+    pc = getToolByName(context, "portal_catalog")
+    query = {"object_provides":Iniandu.__identifier__}
+    bns = pc(query)
+
+    bns = filter(idFilter,bns)
+#     if len(bns) > 5:
+#         bns = bns[:4]    
+    finishlist = map(maptitle,bns)      
+        
+def idFilter(brain):
+    "if title field  exist '<built-in function id>' ,return True,else return False"
+    des = brain.Title
+    if isinstance(des, unicode):
+        des = des.encode('utf-8')
+    if modelid in des:
+        return True
+    else:
+        return False        
+
+def maptitle(brain):
+    "replace"
+
+    target = brain.getObject()
+    des = target.title
+    if isinstance(des, unicode):
+        des = des.encode('utf-8')
+    newd = des.replace(modelid,'')
+    target.description = newd
+    target.reindexObject(idxs=['Title'])    
     
 
 

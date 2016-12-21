@@ -59,10 +59,17 @@
       handler="shuiwu.policy.migration.appendNianduContainer"
       profile="shuiwu.baoshui:default"/>
   <genericsetup:upgradeStep
-      title="replace nashuiren description"
-      description="update step replace nashuiren description."
+      title="replace niandu title"
+      description="update step replace niandu title."
       source="1003"
       destination="1004"
-      handler="shuiwu.policy.migration.resetDescription"
-      profile="shuiwu.baoshui:default"/>       
+      handler="shuiwu.policy.migration.resetTitle"
+      profile="shuiwu.baoshui:default"/>
+  <genericsetup:upgradeStep
+      title="rebuild nashuiren index"
+      description="update step for rebuild nashuiren index."
+      source="1003"
+      destination="1004"
+      handler="shuiwu.policy.migration.build_index_nashuiren"
+      profile="shuiwu.baoshui:default"/>             
 </configure>
