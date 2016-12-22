@@ -6,6 +6,12 @@ from shuiwu.baoshui.content.nashuiren import Inashuiren
 from shuiwu.baoshui.content.niandu import Iniandu
 from shuiwu.baoshui.subscriber import subids
 
+def findid_noteq_guanlidaima(context):
+    pc = getToolByName(context, "portal_catalog")
+    query = {"object_provides":Inashuiren.__identifier__}
+    bns = pc(query)
+    bns = [bn.id for bn in bns if bns.id != bns.guanlidaima]   
+
 def build_index_nashuiren(context):
     "for nashuiren rebuild indexs"
     #search all nashuiren objects that have not sub object
