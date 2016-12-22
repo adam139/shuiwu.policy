@@ -56,11 +56,12 @@ def mapf(brain):
 def map_build_subtree(brain):
     "create new niandu subtree"
     obj = brain.getObject()
+    id = '2017'
     target = api.content.create(
 #     id = datetime.datetime.today().strftime("%Y"),
-    id = '2017',
+    id = id,
     type='shuiwu.baoshui.niandu',
-    title=u'年度记录',
+    title=u'%s年度记录' % id,
     container=obj)
     status = obj.status
     description = obj.description
