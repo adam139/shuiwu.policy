@@ -32,7 +32,7 @@ def createChildTree(context):
     pc = getToolByName(context, "portal_catalog")
     query = {"object_provides":Inashuiren.__identifier__}
     bns = pc(query)
-    bns = map_build_subtree(map_build_subtree,filter(everypathsearchFilter,bns))
+    bns = map(map_build_subtree,filter(everypathsearchFilter,bns))
 #     if len(bns) > 5000:
 #         bns = bns[:4999]    
 #     finishlist = map(map_build_subtree,bns)
