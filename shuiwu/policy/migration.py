@@ -19,7 +19,28 @@ def build_index_nashuiren(context):
     query = {"object_provides":Inashuiren.__identifier__}
     bns = pc(query)
     finished = map(rebuild_index,bns)
+def migrate2niandu(context):
+    pc = getToolByName(context, "portal_catalog")
+    query = {"object_provides":Inashuiren.__identifier__}
+    bns = pc(query)
+    bns = filter(niandu_is_empty_subject,bns)
+    finished = map(migrate_subject,bns)    
+        
+def niandu_is_empty_subject(brain):
+    "brain is nashuiren brain"
+    if len(brain.Subject) > 1:
+        return True
+    else:
+        return False
     
+def migrate_subject(brain):
+    "migrate brain's subject to sub-niandu object"
+    subjects = brain.Subject
+    nashuiren = brain.getObject()
+    son = nashuiren['2016']
+    son.setSubject(tuple(subjects))
+    nashuiren.setSubject(tuple())                        
+    son.reindexObject(idxs=["Subject"])    
 def rebuild_index(brain):
     obj = brain.getObject()
     obj.reindexObject(idxs=["Subject","Title","Description","status","regtype","shuiguanyuan",
