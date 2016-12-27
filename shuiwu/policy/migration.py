@@ -19,6 +19,17 @@ def build_index_nashuiren(context):
     query = {"object_provides":Inashuiren.__identifier__}
     bns = pc(query)
     finished = map(rebuild_index,bns)
+
+##start迁移年度记录下面的子对象到纳税人对象（父对象）
+def migrateback2nashuiren(context):
+    "for nashuiren rebuild indexs"
+    #search all nashuiren objects that have not sub object
+    pc = getToolByName(context, "portal_catalog")
+    query = {"object_provides":Iniandu.__identifier__}
+    bns = pc(query)
+    finished = map(rebuild_index,bns)
+
+##end 迁移年度记录下面的子对象到纳税人对象（父对象）
 def migrate2niandu(context):
     pc = getToolByName(context, "portal_catalog")
     query = {"object_provides":Inashuiren.__identifier__}
@@ -41,6 +52,7 @@ def migrate_subject(brain):
     son.setSubject(tuple(subjects))
     nashuiren.setSubject(tuple())                        
     son.reindexObject(idxs=["Subject"])    
+
 def rebuild_index(brain):
     obj = brain.getObject()
     obj.reindexObject(idxs=["Subject","Title","Description","status","regtype","shuiguanyuan",
@@ -65,14 +77,7 @@ def getTargetobj(context,objid):
     bns = pc(query)
     return bns[0].getObject()
         
-def mapf(brain):
-    "copy & paster sub tree for the brain"
 
-    target = brain.getObject()
-    source = getTargetobj(target,"43062519700816052X01")       
-    for subid,subtype,title,num in subids:
-        subobj = source[subid]
-        api.content.copy(source=subobj, target=target)
 
 def map_build_subtree(brain):
     "create new niandu subtree"
@@ -153,17 +158,55 @@ def notmoveFilter(brain):
         return True
     else:
         return False
-        
+ 
+
+## start migrate subobj to niandu            
 def appendNianduContainer(context): 
     "niandu object append to nashuiren container"
     pc = getToolByName(context, "portal_catalog")
     query = {"object_provides":Inashuiren.__identifier__}
     bns = pc(query)
+#     bns = map(mapc,filter(notmoveFilter,bns))
+    bngenerator = generator_notmoveFilter(bns)    
+#     import pdb
+#     pdb.set_trace()  
+    for gen in bngenerator:
+        map4obj(gen)
+             
+def generator_notmoveFilter(brains):
+    "if not exist niandu object,return True,else return False"
+    for brain in brains:
+        context = brain.getObject()
+        bns = api.content.find(context=context,depth=1)
+        if len(bns) > 1:
+            yield context
+        else:
+            continue
+def map4obj(obj):
+    "new create niandu container and move nashuiren's children to it"    
+    id = datetime.datetime.today().strftime("%Y")
+    try:
+        target = obj[id]
+    except:        
+        target = api.content.create(
+                                    id = id,
+                                    type='shuiwu.baoshui.niandu',
+                                    title=u'年度记录',
+                                    container=obj)          
+   
+    subbrains = api.content.find(context=obj,depth=1)
+    subgenerator = subobj_generator(subbrains,id)
+#     import pdb
+#     pdb.set_trace()
+    for subobj in subgenerator:
+        api.content.move(source=subobj, target=target) 
+def subobj_generator(brains,id):
+    for bn in brains:
+        if bn.id == id: continue
+        yield bn.getObject()       
+    
+## end migrate subobj to niandu container
 
-    bns = map(mapc,filter(notmoveFilter,bns))
-#     if len(bns) > 100:
-#         bns = bns[:99]    
-#     finishlist = map(mapc,bns)              
 
 def mapc(brain):
     "new create niandu container and move nashuiren's children to it"
