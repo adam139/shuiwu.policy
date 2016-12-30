@@ -166,6 +166,8 @@ def appendNianduContainer(context):
     pc = getToolByName(context, "portal_catalog")
     query = {"object_provides":Inashuiren.__identifier__}
     bns = pc(query)
+    if len(bns) > 200:
+        bns = bns[:199]
 #     bns = map(mapc,filter(notmoveFilter,bns))
     bngenerator = generator_notmoveFilter(bns)    
 #     import pdb
