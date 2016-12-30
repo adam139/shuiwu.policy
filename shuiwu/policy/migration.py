@@ -65,10 +65,11 @@ def createChildTree(context):
     pc = getToolByName(context, "portal_catalog")
     query = {"object_provides":Inashuiren.__identifier__}
     bns = pc(query)
-    bns = map(map_build_subtree,filter(everypathsearchFilter,bns))
-#     if len(bns) > 5000:
-#         bns = bns[:4999]    
-#     finishlist = map(map_build_subtree,bns)
+    bns = filter(everypathsearchFilter,bns)
+    if len(bns) > 2000:
+        bns = bns[:1999]     
+    bns = map(map_build_subtree,gen_everypathsearchFilter(bns))   
+    finishlist = map(map_build_subtree,bns)
         
 def getTargetobj(context,objid):
     "get target nashuiren object that has been created sub tree by object id"
@@ -79,9 +80,9 @@ def getTargetobj(context,objid):
         
 
 
-def map_build_subtree(brain):
+def map_build_subtree(obj):
     "create new niandu subtree"
-    obj = brain.getObject()
+#     obj = brain.getObject()
     id = '2017'
     target = api.content.create(
 #     id = datetime.datetime.today().strftime("%Y"),
@@ -124,6 +125,19 @@ def pathsearchFilter(brain):
         return True
     else:
         return False
+def gen_everypathsearchFilter(brains):
+    "search the specify brain, path of the brain,if the path has sub-object,return True" 
+    for brain in brains:
+        context = brain.getObject()
+        pc = getToolByName(context, "portal_catalog")
+        query = {"path":"/".join(context.getPhysicalPath())}
+        #     id = datetime.datetime.today().strftime("%Y")
+        query['id'] = '2017'
+        bns = pc(query)
+        if len(bns) < 1:
+            yield context
+        else:
+            continue 
 
 def everypathsearchFilter(brain):
     "search the specify brain, path of the brain,if the path has sub-object,return True" 
@@ -166,6 +180,7 @@ def appendNianduContainer(context):
     pc = getToolByName(context, "portal_catalog")
     query = {"object_provides":Inashuiren.__identifier__}
     bns = pc(query)
+    bns = filter(notmoveFilter,bns)
     if len(bns) > 200:
         bns = bns[:199]
 #     bns = map(mapc,filter(notmoveFilter,bns))
