@@ -5,6 +5,7 @@ import datetime
 from shuiwu.baoshui.content.nashuiren import Inashuiren
 from shuiwu.baoshui.content.niandu import Iniandu
 from shuiwu.baoshui.subscriber import subids
+from shuiwu.baoshui.subscriber import getout
 
 def findid_noteq_guanlidaima(context):
     pc = getToolByName(context, "portal_catalog")
@@ -107,8 +108,8 @@ def map_build_subtree(obj):
         tag = "%s-%s" %(group,shuiguanyuan)
         init_tags.append(tag)
     subjects = yuedu_subjects + jidu_subjects + ling_subjects + init_tags   
-    obj.setSubject(tuple(subjects))                        
-    obj.reindexObject(idxs=["Subject"])
+    target.setSubject(tuple(subjects))                        
+    target.reindexObject(idxs=["Subject"])
    # Put the tasks into the queue as a tuple
     for subid,title in subids:
         title = title.encode('utf-8')
@@ -166,6 +167,7 @@ def notexistsearchFilter(brain):
     
 def notmoveFilter(brain):
     "if not exist niandu object,return True,else return False"
+    if brain.regtype ==  getout[0].encode('utf-8'):return False
     context = brain.getObject()
     bns = api.content.find(context=context,depth=1)
     if len(bns) > 1:
@@ -181,8 +183,8 @@ def appendNianduContainer(context):
     query = {"object_provides":Inashuiren.__identifier__}
     bns = pc(query)
     bns = filter(notmoveFilter,bns)
-    if len(bns) > 200:
-        bns = bns[:199]
+    if len(bns) > 600:
+        bns = bns[:799]
 #     bns = map(mapc,filter(notmoveFilter,bns))
     bngenerator = generator_notmoveFilter(bns)    
 #     import pdb
@@ -201,7 +203,8 @@ def generator_notmoveFilter(brains):
             continue
 def map4obj(obj):
     "new create niandu container and move nashuiren's children to it"    
-    id = datetime.datetime.today().strftime("%Y")
+#     id = datetime.datetime.today().strftime("%Y")
+    id = '2016'
     try:
         target = obj[id]
     except:        
