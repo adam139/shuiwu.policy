@@ -183,15 +183,30 @@ def appendNianduContainer(context):
     query = {"object_provides":Inashuiren.__identifier__}
     bns = pc(query)
     bns = filter(notmoveFilter,bns)
-    if len(bns) > 600:
-        bns = bns[:799]
+    if len(bns) > 1400:
+        bns = bns[:699]
 #     bns = map(mapc,filter(notmoveFilter,bns))
     bngenerator = generator_notmoveFilter(bns)    
 #     import pdb
 #     pdb.set_trace()  
     for gen in bngenerator:
         map4obj(gen)
-             
+
+def appendNianduContainer2(context): 
+    "niandu object append to nashuiren container"
+    pc = getToolByName(context, "portal_catalog")
+    query = {"object_provides":Inashuiren.__identifier__}
+    bns = pc(query)
+    bns = filter(notmoveFilter,bns)
+    if len(bns) > 1200:
+        bns = bns[700:]
+#     bns = map(mapc,filter(notmoveFilter,bns))
+    bngenerator = generator_notmoveFilter(bns)    
+#     import pdb
+#     pdb.set_trace()  
+    for gen in bngenerator:
+        map4obj(gen)
+                     
 def generator_notmoveFilter(brains):
     "if not exist niandu object,return True,else return False"
     for brain in brains:
