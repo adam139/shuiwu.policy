@@ -5,7 +5,7 @@ import datetime
 from shuiwu.baoshui.content.nashuiren import Inashuiren
 from shuiwu.baoshui.content.niandu import Iniandu
 from shuiwu.baoshui.subscriber import subids
-from shuiwu.baoshui.subscriber import getout
+from shuiwu.baoshui.subscriber import getout,tagroup,yuedu_subjects,jidu_subjects,ling_subjects
 
 def findid_noteq_guanlidaima(context):
     pc = getToolByName(context, "portal_catalog")
@@ -31,7 +31,7 @@ def migrateback2nashuiren(context):
     finished = map(rebuild_index,bns)
 
 ##end 迁移年度记录下面的子对象到纳税人对象（父对象）
-def migrate2niandu(context):
+def migratesubject2niandu(context):
     pc = getToolByName(context, "portal_catalog")
     query = {"object_provides":Inashuiren.__identifier__}
     bns = pc(query)
@@ -81,9 +81,9 @@ def getTargetobj(context,objid):
         
 
 
-def map_build_subtree(obj):
+def map_build_subtree(brain):
     "create new niandu subtree"
-#     obj = brain.getObject()
+    obj = brain.getObject()
     id = '2017'
     target = api.content.create(
 #     id = datetime.datetime.today().strftime("%Y"),
@@ -142,6 +142,7 @@ def gen_everypathsearchFilter(brains):
 
 def everypathsearchFilter(brain):
     "search the specify brain, path of the brain,if the path has sub-object,return True" 
+    if brain.regtype ==  getout[0].encode('utf-8'):return False
     context = brain.getObject()
     pc = getToolByName(context, "portal_catalog")
     query = {"path":"/".join(context.getPhysicalPath())}
