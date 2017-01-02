@@ -69,7 +69,7 @@ def createChildTree(context):
     bns = filter(everypathsearchFilter,bns)
     if len(bns) > 2000:
         bns = bns[:1999]     
-    bns = map(map_build_subtree,gen_everypathsearchFilter(bns))   
+#     bns = map(map_build_subtree,gen_everypathsearchFilter(bns))   
     finishlist = map(map_build_subtree,bns)
         
 def getTargetobj(context,objid):
@@ -185,12 +185,12 @@ def appendNianduContainer(context):
     bns = filter(notmoveFilter,bns)
     if len(bns) > 1400:
         bns = bns[:699]
-#     bns = map(mapc,filter(notmoveFilter,bns))
-    bngenerator = generator_notmoveFilter(bns)    
+    bns = map(mapc,bns)
+#     bngenerator = generator_notmoveFilter(bns)    
 #     import pdb
 #     pdb.set_trace()  
-    for gen in bngenerator:
-        map4obj(gen)
+#     for gen in bngenerator:
+#         map4obj(gen)
 
 def appendNianduContainer2(context): 
     "niandu object append to nashuiren container"
@@ -247,7 +247,8 @@ def mapc(brain):
     "new create niandu container and move nashuiren's children to it"
 
     obj = brain.getObject()
-    id = datetime.datetime.today().strftime("%Y")    
+#     id = datetime.datetime.today().strftime("%Y")
+    id = '2016'    
 #     target = api.content.create(
 #     id = id
 #     type='shuiwu.baoshui.niandu',
