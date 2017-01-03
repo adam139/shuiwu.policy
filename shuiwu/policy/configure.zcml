@@ -88,5 +88,12 @@
       destination="1004"
       handler="shuiwu.policy.migration.migratesubject2niandu"
       profile="shuiwu.baoshui:default"/> 
-                        
+
+  <genericsetup:upgradeStep
+      title="geti nashuiren set default view"
+      description="geti nashuiren set default view."
+      source="1003"
+      destination="1004"
+      handler="shuiwu.policy.migration.nashuiren_set_defaultview"
+      profile="shuiwu.baoshui:default"/>                         
 </configure>

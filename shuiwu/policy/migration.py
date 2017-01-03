@@ -6,7 +6,24 @@ from shuiwu.baoshui.content.nashuiren import Inashuiren
 from shuiwu.baoshui.content.niandu import Iniandu
 from shuiwu.baoshui.subscriber import subids
 from shuiwu.baoshui.subscriber import getout,tagroup,yuedu_subjects,jidu_subjects,ling_subjects
+## start 內资个体设置默认视图
+def nashuiren_set_defaultview(context):
+    pc = getToolByName(context, "portal_catalog")
+    query = {"object_provides":Inashuiren.__identifier__}
+    bns = pc(query)
+    bns = filter(nashuiren_is_geti,bns)
+    finished = map(setlayout,bns) 
+def nashuiren_is_geti(brain):
+    "brain is nashuiren brain"
+    if brain.regtype ==  getout[0].encode('utf-8'):
+        return True
+    else:
+        return False
 
+def setlayout(brain):
+    obj = brain.getObject()
+    obj.setLayout("view")
+## end 內资个体设置默认视图
 def findid_noteq_guanlidaima(context):
     pc = getToolByName(context, "portal_catalog")
     query = {"object_provides":Inashuiren.__identifier__}
