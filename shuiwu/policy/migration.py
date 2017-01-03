@@ -43,6 +43,7 @@ def init_subjectfornashuiren(context):
     finished = map(init_subject,bns) 
 def nashuiren_is_empty_subject(brain):
     "brain is nashuiren brain"
+    if brain.regtype ==  getout[0].encode('utf-8'):return False
     if len(brain.Subject) < 1:
         return True
     else:
