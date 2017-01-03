@@ -31,6 +31,45 @@ def migrateback2nashuiren(context):
     finished = map(rebuild_index,bns)
 
 ##end 迁移年度记录下面的子对象到纳税人对象（父对象）
+## start update empty subject to init subject for nashuiren
+def init_subjectfornashuiren(context):
+    pc = getToolByName(context, "portal_catalog")
+    query = {"object_provides":Inashuiren.__identifier__}
+#     query["Subject"] = tuple()
+    bns = pc(query)
+    bns = filter(nashuiren_is_empty_subject,bns)
+    import pdb
+    pdb.set_trace()
+    finished = map(init_subject,bns) 
+def nashuiren_is_empty_subject(brain):
+    "brain is nashuiren brain"
+    if len(brain.Subject) < 1:
+        return True
+    else:
+        return False
+def init_subject(brain):
+    "migrate brain's subject to sub-niandu object"
+    obj = brain.getObject()
+    status = obj.status
+    description = obj.description
+    shuiguanyuan = obj.shuiguanyuan
+    init_tags = []
+    if status != "":
+        group = tagroup[0].encode("utf-8")
+        tag = "%s-%s" %(group,status)
+        init_tags.append(tag)
+    if description != "":
+        group = tagroup[1].encode("utf-8")
+        tag = "%s-%s" %(group,description)
+        init_tags.append(tag)
+    if shuiguanyuan != "":
+        group = tagroup[2].encode("utf-8")
+        tag = "%s-%s" %(group,shuiguanyuan)
+        init_tags.append(tag)
+    subjects = yuedu_subjects + jidu_subjects + ling_subjects + init_tags   
+    obj.setSubject(tuple(subjects))                        
+    obj.reindexObject(idxs=["Subject"])
+## end update empty subject to init subject for nashuiren    
 def migratesubject2niandu(context):
     pc = getToolByName(context, "portal_catalog")
     query = {"object_provides":Inashuiren.__identifier__}
@@ -78,9 +117,7 @@ def getTargetobj(context,objid):
     query = {"object_provides":Inashuiren.__identifier__,'id':objid}
     bns = pc(query)
     return bns[0].getObject()
-        
-
-
+      
 def map_build_subtree(brain):
     "create new niandu subtree"
     obj = brain.getObject()

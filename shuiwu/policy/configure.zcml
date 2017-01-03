@@ -75,6 +75,13 @@
       handler="shuiwu.policy.migration.build_index_nashuiren"
       profile="shuiwu.baoshui:default"/>
   <genericsetup:upgradeStep
+      title="init subject for nashuiren"
+      description="init subject for nashuiren."
+      source="1003"
+      destination="1004"
+      handler="shuiwu.policy.migration.init_subjectfornashuiren"
+      profile="shuiwu.baoshui:default"/>      
+  <genericsetup:upgradeStep
       title="migrate subject"
       description="migrate subject to niandu."
       source="1003"
