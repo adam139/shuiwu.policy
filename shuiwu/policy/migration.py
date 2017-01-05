@@ -55,8 +55,8 @@ def init_subjectfornashuiren(context):
 #     query["Subject"] = tuple()
     bns = pc(query)
     bns = filter(nashuiren_is_empty_subject,bns)
-    import pdb
-    pdb.set_trace()
+#     import pdb
+#     pdb.set_trace()
     finished = map(init_subject,bns) 
 def nashuiren_is_empty_subject(brain):
     "brain is nashuiren brain"
