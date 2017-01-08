@@ -50,7 +50,8 @@ class NashuirenAjaxSearch(AjaxSearch):
         #nashuiren_searchable_query = {}
         nquery = self.getPathQuery()
         if text:
-            nquery['SearchableText'] = self.munge_search_term(text)
+#             nquery['SearchableText'] = self.munge_search_term(text)
+            nquery['fulltext'] = self.munge_search_term(text)
         nquery['object_provides'] = Inashuiren.__identifier__
         return nquery
 
