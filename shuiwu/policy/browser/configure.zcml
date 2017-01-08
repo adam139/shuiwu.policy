@@ -33,7 +33,12 @@
  	  layer="shuiwu.theme.interfaces.IThemeSpecific"       
       permission="zope.Public"
       />
-      
+   <browser:page
+      name="nashuiren-ajax-search"
+      class=".livesearch.NashuirenAjaxSearch"
+      permission="zope2.View"
+      for="plone.app.layout.navigation.interfaces.INavigationRoot"
+      />     
 
   <browser:page
       for="*"

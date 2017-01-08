@@ -48,7 +48,9 @@ class SearchBoxViewlet(ViewletBase):
     @memoize
     def data_pat_livesearch(self):
         navroot = self.navigation_root_url
-        out = "ajaxUrl:%s/@@ajax-search;minimumInputLength:2" % navroot
+
+        out = "ajaxUrl:%s/@@nashuiren-ajax-search;minimumInputLength:4" % navroot
+        #out = "ajaxUrl:%s/@@ajax-search;minimumInputLength:4" % navroot
         return out
 
 # class LogoViewlet(base):
