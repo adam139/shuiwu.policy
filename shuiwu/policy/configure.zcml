@@ -95,5 +95,12 @@
       source="1003"
       destination="1004"
       handler="shuiwu.policy.migration.nashuiren_set_defaultview"
-      profile="shuiwu.baoshui:default"/>                         
+      profile="shuiwu.baoshui:default"/>
+  <genericsetup:upgradeStep
+      title="remove duplicated Nashuiren"
+      description="remove duplicated Nashuiren"
+      source="1003"
+      destination="1004"
+      handler="shuiwu.policy.migration.nashuiren_remove_duplicate"
+      profile="shuiwu.baoshui:default"/>                               
 </configure>

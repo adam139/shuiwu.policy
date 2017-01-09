@@ -6,6 +6,38 @@ from shuiwu.baoshui.content.nashuiren import Inashuiren
 from shuiwu.baoshui.content.niandu import Iniandu
 from shuiwu.baoshui.subscriber import subids
 from shuiwu.baoshui.subscriber import getout,tagroup,yuedu_subjects,jidu_subjects,ling_subjects
+
+## start 删除重复纳税人（title相同，id不同）
+id = set()
+def nashuiren_remove_duplicate(context):
+    pc = getToolByName(context, "portal_catalog")
+    query = {"object_provides":Inashuiren.__identifier__,"sort_on":"created","sort_order":"reverse"}
+    bns = pc(query)
+    bns = filter(nashuiren_is_repeat,bns)
+    finished = map(delete_obj,bns) 
+def nashuiren_is_repeat(brain):
+    "brain is nashuiren brain"
+    catalog = api.portal.get_tool(name='portal_catalog')
+    title = brain.Title
+
+    id.add(brain.id)
+    newbns = catalog({"object_provides":Inashuiren.__identifier__,"sort_on":"created","sort_order":"forward"})
+    result = False
+    for bn in newbns:        
+        if bn.Title ==  title and bn.id not in id:
+            result = True
+            id.add(bn.id)
+            break            
+        else:
+            continue
+    return result
+    
+def delete_obj(brain):
+    obj = brain.getObject()
+    portal = api.portal.get()
+    api.content.delete(obj=obj)
+## end 删除重复纳税人（title相同，id不同)
+
 ## start 內资个体设置默认视图
 def nashuiren_set_defaultview(context):
     pc = getToolByName(context, "portal_catalog")
