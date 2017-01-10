@@ -9,7 +9,15 @@
   <include file="caching.zcml" />
   
     <include package="shuiwu.baoshui" file="permissions.zcml" />
- 
+    <!-- Custom Overview Control Panel Overview -->
+  <browser:page
+      name="overview-controlpanel"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      layer="shuiwu.theme.interfaces.IThemeSpecific"      
+      class=".overview.OverviewControlPanel"
+      permission="plone.app.controlpanel.Overview"
+      />
+  
   <browser:page
       for="Products.CMFCore.interfaces.ISiteRoot"
       name="index.html"
