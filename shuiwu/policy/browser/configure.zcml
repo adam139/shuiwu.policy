@@ -28,12 +28,22 @@
 />
   <browser:page
       for="Products.CMFCore.interfaces.ISiteRoot"
+      name="preview.html"
+      class=".homepage.FrontpageView"
+      permission="shuiwu.baoshui.view_shuiwusummary"
+      layer="shuiwu.theme.interfaces.IThemeSpecific"       
+      template="templates/preview_total_ajax_listings.pt"
+/>
+
+  <browser:page
+      for="Products.CMFCore.interfaces.ISiteRoot"
       name="total.html"
       class=".homepage.TagSearchView"
       permission="shuiwu.baoshui.view_shuiwusummary"
       layer="shuiwu.theme.interfaces.IThemeSpecific"       
       template="templates/total_ajax_listings.pt"
-/>       
+/>
+       
    <browser:page
       for="Products.CMFCore.interfaces.ISiteRoot"
       name="ajax_db_search"

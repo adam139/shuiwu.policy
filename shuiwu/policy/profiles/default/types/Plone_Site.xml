@@ -6,6 +6,13 @@
  <property name="default_view">index.html</property>
  <property name="view_methods" purge="false">>
   <element value="index.html"/>
+  <element value="preview.html"/>  
   <element value="folder_listing"/>
  </property>
+  <!-- Actions -->
+  <action title="View" action_id="view" category="object" condition_expr=""
+    url_expr="string:${object_url}/@@preview.html" visible="True">
+    <permission value="shuiwu.baoshui:View shuiwusummary" />
+  </action> 
+ 
 </object>
