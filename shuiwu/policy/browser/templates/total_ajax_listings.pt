@@ -35,7 +35,7 @@
 			<input type="hidden" value="0" id="securityLevelSearch">
 			<input type="hidden" value="0" id="categorySearch">
 			<input type="hidden" value="0" id="tagSearch">
-			<input type="hidden" value="created" id="solrSortColumn">
+			<input type="hidden" value="modified" id="solrSortColumn">
 			<input type="hidden" value="reverse" id="solrSortDirection">
 			<ul class="row list-inline" id="dateRangeSearchUl">
 				<li class="title">按修改日期：</li>
