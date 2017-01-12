@@ -10,7 +10,7 @@
   <element value="folder_listing"/>
  </property>
   <!-- Actions -->
-  <action title="View" action_id="view" category="object" condition_expr=""
+  <action title="View last year" action_id="view" category="object" condition_expr=""
     url_expr="string:${object_url}/@@preview.html" visible="True">
     <permission value="shuiwu.baoshui:View shuiwusummary" />
   </action> 

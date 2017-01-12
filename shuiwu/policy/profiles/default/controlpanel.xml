@@ -12,7 +12,7 @@
  <configlet title="Date and Time" action_id="DateAndTime" appId="DateAndTime"
     category="plone-general" condition_expr=""
     icon_expr="string:$portal_url/event_icon.png"
-    url_expr="string:${portal_url}/@@dateandtime-controlpanel" visible="True">
+    url_expr="string:${portal_url}/@@dateandtime-controlpanel" visible="False">
   <permission>Plone Site Setup: Site</permission>
  </configlet>
  <configlet title="Editing" action_id="EditingSettings" appId="Plone"
@@ -134,7 +134,7 @@
  <configlet title="Errors" action_id="errorLog" appId="ErrorLog"
     category="plone-security" condition_expr=""
     icon_expr="string:$portal_url/error_log_icon.png"
-    url_expr="string:${portal_url}/prefs_error_log_form" visible="True">
+    url_expr="string:${portal_url}/prefs_error_log_form" visible="False">
   <permission>Manage portal</permission>
  </configlet>
  <configlet title="Caching" action_id="plone.app.caching"
