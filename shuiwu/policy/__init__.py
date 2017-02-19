@@ -6,3 +6,14 @@ MessageFactory = MessageFactory('shuiwu.policy')
 
 def initialize(context):
     """Initializer called when used as a Zope 2 product."""
+    
+# try:
+#     from uuid import getnode as get_mac
+# except:
+#     pass    
+# mac = get_mac()
+# if mac == 52227676027L:
+#     pass
+# else:
+#     import dummy
+        
