@@ -3,13 +3,11 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:z3c="http://namespaces.zope.org/z3c"
     xmlns:grok="http://namespaces.zope.org/grok"    
-    i18n_domain="shuiwu.policy">
-    
+    i18n_domain="shuiwu.policy">    
 
-  <include file="caching.zcml" />
-  
-    <include package="shuiwu.baoshui" file="permissions.zcml" />
-    <!-- Custom Overview Control Panel Overview -->
+  <include file="caching.zcml" />  
+  <include package="shuiwu.baoshui" file="permissions.zcml" />
+  <!-- Custom Overview Control Panel Overview -->
   <browser:page
       name="overview-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
@@ -25,7 +23,7 @@
       permission="shuiwu.baoshui.view_shuiwusummary"
       layer="shuiwu.theme.interfaces.IThemeSpecific"       
       template="templates/total_ajax_listings.pt"
-/>
+	  />
   <browser:page
       for="Products.CMFCore.interfaces.ISiteRoot"
       name="preview.html"
@@ -33,7 +31,7 @@
       permission="shuiwu.baoshui.view_shuiwusummary"
       layer="shuiwu.theme.interfaces.IThemeSpecific"       
       template="templates/preview_total_ajax_listings.pt"
-/>
+      />
 
   <browser:page
       for="Products.CMFCore.interfaces.ISiteRoot"
@@ -42,7 +40,7 @@
       permission="shuiwu.baoshui.view_shuiwusummary"
       layer="shuiwu.theme.interfaces.IThemeSpecific"       
       template="templates/total_ajax_listings.pt"
-/>
+      />
        
    <browser:page
       for="Products.CMFCore.interfaces.ISiteRoot"
@@ -62,60 +60,52 @@
       for="*"
       name="footer"
       permission="zope.Public"
- 	    layer=".interfaces.IThemeSpecific"       
+ 	  layer=".interfaces.IThemeSpecific"       
       template="templates/footer.pt"
       />
             
-    <!-- The search box -->
-    <browser:viewlet
+  <!-- The search box -->
+  <browser:viewlet
         name="plone.searchbox"
         layer=".interfaces.IThemeSpecific"        
         manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
         class=".common.SearchBoxViewlet"
         permission="zope2.View"
-        />     
-
-        
+        />           
        
-    <!-- Override global sections viewlet -->
-    
+  <!-- Override global sections viewlet -->    
   <browser:page
         name="batchnavigation"
         for="*"
         permission="zope.Public"
         class="plone.batching.browser.PloneBatchView"
-    		 layer=".interfaces.IThemeSpecific"        
+    	layer=".interfaces.IThemeSpecific"        
         template="templates/batchnavigation_bootstrap.pt"
+        /> 
+  <browser:resourceDirectory
+        name="shuiwu.policy"
+        directory="static"
         />
-  
-
- 	<browser:resourceDirectory
-  name="shuiwu.policy"
-  directory="static" />
-
-
-<!-- manage tools-->      
-   <browser:page
+  <!-- manage tools-->      
+  <browser:page
       for="*"
       name="set_layout"
       class=".manage_tools.setLayout"
       layer="zope.interface.Interface"        
       permission="cmf.ManagePortal"
       />
-   <browser:page
+  <browser:page
       for="*"
       name="add_mark"
       class=".manage_tools.addMarkInterface"
       layer="zope.interface.Interface"        
       permission="cmf.ManagePortal"
       />
-   <browser:page
+  <browser:page
       for="*"
       name="set_date"
       class=".manage_tools.setDate"
       layer="zope.interface.Interface"       
       permission="cmf.ManagePortal"
-      />      	
-
-
+      />    	
 </configure>

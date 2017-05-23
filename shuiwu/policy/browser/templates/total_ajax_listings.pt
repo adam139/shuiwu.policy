@@ -31,12 +31,32 @@
 					</button>
 				</div>				
 			</div>
+			<input type="hidden" value="0" id="annualSearch">
 			<input type="hidden" value="0" id="dateSearch">
 			<input type="hidden" value="0" id="securityLevelSearch">
 			<input type="hidden" value="0" id="categorySearch">
 			<input type="hidden" value="0" id="tagSearch">
 			<input type="hidden" value="modified" id="solrSortColumn">
 			<input type="hidden" value="reverse" id="solrSortDirection">
+            <ul class="row list-inline" id="annualRangeSearchUl">
+				<li class="title">按申报年度：</li>
+				<li class="all">
+					<span class="over" data-name="0">
+						<a class="btn btn-primary" href="javascript:void(0)" role="button">今年</a>
+						</span>
+				</li>
+				<li class="list_span" class="fenlei_a">
+					<span data-name="1">
+                        <a class="btn btn-default" href="javascript:void(0)" role="button">去年</a><!-- 今天 -->
+                    </span>
+                    <span data-name="2">
+                        <a class="btn btn-default" href="javascript:void(0)" role="button">前年</a><!-- 明天 -->
+                    </span>
+                    <span data-name="3">
+                        <a class="btn btn-default" href="javascript:void(0)" role="button">大前年</a><!-- 7天内 -->
+                    </span>
+                 </li>
+               </ul>
 			<ul class="row list-inline" id="dateRangeSearchUl">
 				<li class="title">按修改日期：</li>
 				<li class="all">
@@ -53,7 +73,7 @@
                         <a class="btn btn-default" href="javascript:void(0)" role="button">最近一年</a><!-- 7天内 -->
                     </span>
                  </li>
-               </ul>
+               </ul>                              
                <div id="taggroups" tal:content="structure python:view.getAllTagsHtml()">
                 <ul class="row list-inline tagSelectSearch">                	
                     <li class="title">按标签：</li>
