@@ -14,6 +14,7 @@
 <body>
 	<div metal:fill-slot="main">
 		<div id="ajaxsearch" style="display: none" tal:attributes="data-ajax-target python:context.absolute_url() + '/@@ajax_total_search'"></div>
+        <div id="ajaxexport" style="display: none" tal:attributes="data-ajax-target python:context.absolute_url() + '/@@export_total_search'"></div>				
 		<div id="ajaxmore" style="display: none" tal:attributes="data-ajax-target python:context.absolute_url() + '/@@sysloadmore_tags'"></div>
 		<div class="container-fluid">
 			<div class="row ajaxsearch hidden">				
@@ -121,6 +122,14 @@
                 	<li><a class="btn btn-default" href="javascript:searchEvent(2,10)" role="button"></a>
                 	</li>
                 </ul>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-xs-12 col-sm-6">
+               	<ul id="inout" class="pager">
+                    <li><a class="btn btn-default" id="export" href="javascript:void(0)">导出</a>
+                    </li>
+                </ul>               		
                </div>
             </div>
             <table class="row table table-striped table-bordered table-condensed pat-tablesorter">
